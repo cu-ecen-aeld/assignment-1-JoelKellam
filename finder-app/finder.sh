@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filesdir=$1
+filedir=$1
 searchstr=$2
 
 if [ $# -ne 2 ]; then
@@ -8,17 +8,17 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-if [ -d "$filesdir" ]; then
+if [ -d "$filedir" ]; then
     : # NOP
 else
-    echo "ERROR: $filesdir doesnt exist."
+    echo "ERROR: $filedir doesnt exist."
     exit 1
 fi
 
-X=$(find $filesdir -mindepth 1 -type f | wc -l)
+X=$(find $filedir -mindepth 1 -type f | wc -l)
 err_code=$?
 
-Y=$(grep -r $filesdir -e $searchstr | wc -l)
+Y=$(grep -r $filedir -e $searchstr | wc -l)
 err_code=$(($?+$err_code))
 
 echo "The number of files are $X and the number of matching lines are $Y"
